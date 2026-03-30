@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+@theme {
+  --color-viant-50: #f0f7fe;
+  --color-viant-100: #d5ecfa;
+  --color-viant-200: #b5dff7;
+  --color-viant-300: #85cdf2;
+  --color-viant-400: #4fb3eb;
+  --color-viant-500: #2a97de;
+  --color-viant-600: #1a7bc5;
+  --color-viant-700: #1662a0;
+  --color-viant-800: #052555;
+  --color-viant-900: #002d6d;
+  --color-viant-950: #001a40;
+  
+  --color-brand-accent: #0066ff;
+  --color-brand-accent-hover: #0052cc;
+}
