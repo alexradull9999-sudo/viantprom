@@ -35,31 +35,28 @@ export function Header({ onOpenCallback }: HeaderProps) {
   return (
     <header 
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-        isScrolled ? 'bg-white/95 backdrop-blur-md shadow-sm py-3' : 'bg-transparent py-5'
+        isScrolled ? 'bg-white/95 backdrop-blur-md shadow-sm py-3' : 'bg-viant-50/80 backdrop-blur-sm py-5'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-            <div className={`transition-all duration-300 ${!isScrolled ? 'bg-white p-2 rounded-xl' : ''}`}>
-              <img 
-                src="/images/herologo.png" 
-                alt="VIANTPROM Logo" 
-                className="h-10 w-auto"
-              />
-            </div>
+            <img 
+              src="/images/herologo.png" 
+              alt="VIANTPROM Logo" 
+              className="h-8 w-auto"
+            />
+            <span className="ml-2 text-xl font-bold text-viant-900 tracking-tight">Viantprom</span>
           </div>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center space-x-10">
             {navLinks.map((link) => (
               <button 
                 key={link.name}
                 onClick={() => scrollToSection(link.href)}
-                className={`font-medium transition-colors hover:text-brand-accent ${
-                  isScrolled ? 'text-viant-600' : 'text-viant-200'
-                }`}
+                className="font-medium text-viant-600 transition-colors hover:text-brand-accent"
               >
                 {link.name}
               </button>
@@ -67,19 +64,17 @@ export function Header({ onOpenCallback }: HeaderProps) {
           </nav>
 
           {/* Phone & CTA */}
-          <div className="hidden md:flex items-center space-x-6">
+          <div className="hidden md:flex items-center space-x-8">
             <a 
               href="tel:+79585812412" 
-              className={`flex items-center font-semibold transition-colors hover:text-brand-accent ${
-                isScrolled ? 'text-viant-900' : 'text-white'
-              }`}
+              className="flex items-center font-semibold text-viant-900 transition-colors hover:text-brand-accent"
             >
-              <Phone className="w-5 h-5 mr-2 text-brand-accent" />
+              <Phone className="w-4 h-4 mr-2 text-viant-600" />
               +7 958 581-24-12
             </a>
             <button 
               onClick={onOpenCallback}
-              className="px-5 py-2.5 bg-brand-accent hover:bg-brand-accent-hover text-white font-medium rounded-lg transition-colors shadow-lg shadow-brand-accent/20"
+              className="px-6 py-2.5 bg-brand-accent hover:bg-brand-accent-hover text-white font-semibold rounded-lg transition-all shadow-md hover:shadow-lg"
             >
               Заказать звонок
             </button>
@@ -87,7 +82,7 @@ export function Header({ onOpenCallback }: HeaderProps) {
 
           {/* Mobile Menu Toggle */}
           <button 
-            className={`md:hidden p-2 transition-colors ${isScrolled ? 'text-viant-900' : 'text-white'}`}
+            className="md:hidden p-2 text-viant-900 transition-colors"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}

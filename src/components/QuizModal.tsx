@@ -9,7 +9,7 @@ interface QuizModalProps {
   initialCategoryId?: string | null;
 }
 
-type Step = 'category' | 'specs' | 'urgency' | 'productCategory' | 'budget' | 'messenger' | 'form' | 'success' | 'disqualified';
+type Step = 'category' | 'specs' | 'urgency' | 'productCategory' | 'budget' | 'messenger' | 'form' | 'success' | 'disqualified' | 'rawMaterial' | 'packagingType' | 'productivity' | 'coatingType';
 
 export function QuizModal({ isOpen, onClose, initialCategoryId }: QuizModalProps) {
   const [step, setStep] = useState<Step>('category');
@@ -20,6 +20,10 @@ export function QuizModal({ isOpen, onClose, initialCategoryId }: QuizModalProps
   const [productCategory, setProductCategory] = useState('');
   const [budget, setBudget] = useState('');
   const [messenger, setMessenger] = useState('');
+  const [rawMaterial, setRawMaterial] = useState('');
+  const [packagingType, setPackagingType] = useState('');
+  const [productivity, setProductivity] = useState('');
+  const [coatingType, setCoatingType] = useState('');
   
   const [phone, setPhone] = useState('');
 
@@ -47,10 +51,32 @@ export function QuizModal({ isOpen, onClose, initialCategoryId }: QuizModalProps
 
   const handleOptionSelect = (option: EquipmentOption) => {
     setSelectedOption(option);
-    if (option.valid) {
-      setStep('urgency');
-    } else {
+    if (!option.valid) {
       setStep('disqualified');
+      return;
+    }
+
+    // Determine next step based on category
+    if (selectedCategory?.id === 'cutters') {
+      setStep('urgency');
+    } else if (selectedCategory?.id === 'packaging') {
+      setStep('packagingType');
+    } else if (selectedCategory?.id === 'weighing') {
+      setStep('productCategory');
+    } else if (selectedCategory?.id === 'separators') {
+      setStep('productivity');
+    } else if (selectedCategory?.id === 'forming') {
+      setStep('urgency');
+    } else if (selectedCategory?.id === 'frying') {
+      setStep('urgency');
+    } else if (selectedCategory?.id === 'breading') {
+      setStep('coatingType');
+    } else if (selectedCategory?.id === 'portioners') {
+      setStep('urgency');
+    } else if (selectedCategory?.id === 'fillers') {
+      setStep('productCategory');
+    } else {
+      setStep('urgency');
     }
   };
 
@@ -63,6 +89,10 @@ export function QuizModal({ isOpen, onClose, initialCategoryId }: QuizModalProps
       productCategory,
       budget,
       messenger,
+      rawMaterial,
+      packagingType,
+      productivity,
+      coatingType,
       phone 
     });
     setStep('success');
@@ -76,6 +106,10 @@ export function QuizModal({ isOpen, onClose, initialCategoryId }: QuizModalProps
     setProductCategory('');
     setBudget('');
     setMessenger('');
+    setRawMaterial('');
+    setPackagingType('');
+    setProductivity('');
+    setCoatingType('');
     setPhone('');
   };
 
@@ -84,9 +118,36 @@ export function QuizModal({ isOpen, onClose, initialCategoryId }: QuizModalProps
     setTimeout(resetQuiz, 300);
   };
 
-  const urgencyOptions = ['В течение месяца', '1-3 месяца', 'Полгода и более', 'Просто прицениваюсь'];
-  const productCategoryOptions = ['Мясо', 'Птица', 'Рыба', 'Овощи/Фрукты', 'Другое'];
-  const budgetOptions = ['До 2 млн ₽', '2 - 5 млн ₽', '5 - 10 млн ₽', 'Более 10 млн ₽', 'Пока не определен'];
+  const urgencyOptions = ['В наличии', 'В течение месяца', 'От одного до трёх месяцев', 'Просто прицениваюсь'];
+  
+  const getProductOptions = () => {
+    if (selectedCategory?.id === 'separators' || selectedCategory?.id === 'fillers') {
+      return ['Мясо', 'Рыба', 'Другое'];
+    }
+    return ['Мясо', 'Рыба', 'Сыр', 'Хлебобулочные', 'Другое'];
+  };
+
+  const getBudgetOptions = () => {
+    if (selectedCategory?.id === 'cutters') return ['5 - 10 млн ₽', 'Более 10 млн ₽'];
+    if (selectedCategory?.id === 'packaging') return ['До 1 млн ₽', 'До 3 млн ₽', 'До 5 млн ₽', 'Выше 5 млн ₽'];
+    if (selectedCategory?.id === 'weighing') return ['До 2 млн ₽', 'До 3 млн ₽', 'До 5 млн ₽', 'Выше 5 млн ₽'];
+    if (selectedCategory?.id === 'separators') return ['До 2 млн ₽', 'До 3 млн ₽', 'До 5 млн ₽', 'Выше 5 млн ₽'];
+    if (selectedCategory?.id === 'forming') return ['До 2 млн ₽', 'До 3 млн ₽', 'До 5 млн ₽', 'Выше 5 млн ₽'];
+    if (selectedCategory?.id === 'frying') return ['До 3 млн ₽', 'До 4 млн ₽', 'До 5 млн ₽', 'Выше 5 млн ₽'];
+    if (selectedCategory?.id === 'breading') return ['До 1.5 млн ₽', 'До 2 млн ₽', 'Выше 5 млн ₽'];
+    if (selectedCategory?.id === 'portioners') return ['До 3 млн ₽', 'До 5 млн ₽', 'Выше 5 млн ₽'];
+    if (selectedCategory?.id === 'fillers') return ['До 5 млн ₽', 'До 7 млн ₽', 'Выше 7 млн ₽'];
+    return ['До 2 млн ₽', '2 - 5 млн ₽', '5 - 10 млн ₽', 'Более 10 млн ₽', 'Пока не определен'];
+  };
+
+  const rawMaterialOptions = ['Охлажденное', 'Замороженное'];
+  const packagingTypeOptions = ['Пакет', 'Лоток'];
+  const getProductivityOptions = () => {
+    if (selectedCategory?.id === 'packaging') return ['20 упаковок/мин', '40 упаковок/мин', '60 упаковок/мин', 'Свыше 60'];
+    if (selectedCategory?.id === 'separators') return ['1000 кг/ч', '3000 кг/ч', '5000 кг/ч', 'Свыше 5000'];
+    return [];
+  };
+  const coatingTypeOptions = ['Сухой', 'Жидкий'];
   const messengerOptions = ['Telegram', 'WhatsApp', 'Messenger Max'];
 
   const renderOptions = (options: string[], onSelect: (val: string) => void) => (
@@ -127,8 +188,12 @@ export function QuizModal({ isOpen, onClose, initialCategoryId }: QuizModalProps
                   {step === 'category' && 'Какое оборудование вас интересует?'}
                   {step === 'specs' && `Требования: ${selectedCategory?.name}`}
                   {step === 'urgency' && 'Как срочно вам нужно оборудование?'}
-                  {step === 'productCategory' && 'Для какой категории продукции нужно оборудование?'}
+                  {step === 'productCategory' && 'Для какой категории продукции?'}
                   {step === 'budget' && 'Какой бюджет вы рассматриваете?'}
+                  {step === 'rawMaterial' && 'Тип сырья'}
+                  {step === 'packagingType' && 'Тип упаковки'}
+                  {step === 'productivity' && 'Производительность'}
+                  {step === 'coatingType' && 'Вид покрытия'}
                   {step === 'messenger' && 'Где вам удобнее получить каталог?'}
                   {step === 'form' && 'Оставьте номер для получения каталога'}
                   {step === 'success' && 'Заявка принята'}
@@ -160,7 +225,18 @@ export function QuizModal({ isOpen, onClose, initialCategoryId }: QuizModalProps
 
                 {step === 'specs' && selectedCategory && (
                   <div className="space-y-3">
-                    <p className="text-viant-600 mb-4">Выберите требуемые характеристики или производительность:</p>
+                    <p className="text-viant-600 mb-4">
+                      {selectedCategory.id === 'cutters' ? 'Выберите объем чаши:' : 
+                       selectedCategory.id === 'packaging' ? 'Выберите продукт:' :
+                       selectedCategory.id === 'weighing' ? 'Производительность (шт/мин):' :
+                       selectedCategory.id === 'separators' ? 'Выберите продукт:' :
+                       selectedCategory.id === 'forming' ? 'Производительность:' :
+                       selectedCategory.id === 'frying' ? 'Производительность:' :
+                       selectedCategory.id === 'breading' ? 'Ширина ленты:' :
+                       selectedCategory.id === 'portioners' ? 'Выберите продукт:' :
+                       selectedCategory.id === 'fillers' ? 'Производительность:' :
+                       'Выберите требуемые характеристики:'}
+                    </p>
                     {selectedCategory.options.map((opt) => (
                       <button
                         key={opt.id}
@@ -180,9 +256,31 @@ export function QuizModal({ isOpen, onClose, initialCategoryId }: QuizModalProps
                   </div>
                 )}
 
-                {step === 'urgency' && renderOptions(urgencyOptions, (val) => { setUrgency(val); setStep('productCategory'); })}
-                {step === 'productCategory' && renderOptions(productCategoryOptions, (val) => { setProductCategory(val); setStep('budget'); })}
-                {step === 'budget' && renderOptions(budgetOptions, (val) => { setBudget(val); setStep('messenger'); })}
+                {step === 'urgency' && renderOptions(urgencyOptions, (val) => { 
+                  setUrgency(val); 
+                  if (selectedCategory?.id === 'cutters') setStep('rawMaterial');
+                  else setStep('budget');
+                })}
+
+                {step === 'rawMaterial' && renderOptions(rawMaterialOptions, (val) => { setRawMaterial(val); setStep('budget'); })}
+                
+                {step === 'packagingType' && renderOptions(packagingTypeOptions, (val) => { setPackagingType(val); setStep('productivity'); })}
+                
+                {step === 'productivity' && renderOptions(getProductivityOptions(), (val) => { 
+                  setProductivity(val); 
+                  setStep('urgency'); 
+                })}
+
+                {step === 'coatingType' && renderOptions(coatingTypeOptions, (val) => { setCoatingType(val); setStep('urgency'); })}
+
+                {step === 'productCategory' && renderOptions(getProductOptions(), (val) => { 
+                  setProductCategory(val); 
+                  if (selectedCategory?.id === 'fillers') setStep('urgency');
+                  else setStep('urgency'); // For weighing it goes to urgency
+                })}
+
+                {step === 'budget' && renderOptions(getBudgetOptions(), (val) => { setBudget(val); setStep('messenger'); })}
+                
                 {step === 'messenger' && renderOptions(messengerOptions, (val) => { setMessenger(val); setStep('form'); })}
 
                 {step === 'form' && (
