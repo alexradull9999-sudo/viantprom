@@ -10,13 +10,21 @@ export function Hero({ onOpenQuiz }: HeroProps) {
   return (
     <div className="relative bg-viant-50 text-viant-900 overflow-hidden min-h-[90vh] flex items-center">
       {/* Background Split */}
-      <div className="absolute inset-0 z-0 flex">
-        <div className="w-full lg:w-[60%] bg-viant-50" />
-        <div className="hidden lg:block w-[40%] bg-viant-950 relative">
-          <div 
-            className="absolute top-0 left-0 h-full w-32 bg-viant-950 -translate-x-1/2"
-            style={{ clipPath: 'polygon(100% 0, 100% 100%, 0 100%)' }}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-viant-50" />
+        <div 
+          className="absolute inset-0 bg-viant-950 hidden lg:block"
+          style={{ clipPath: 'polygon(65% 0, 100% 0, 100% 100%, 45% 100%)' }}
+        >
+          {/* Background Image (Cutter) */}
+          <img 
+            src="/images/cutter.png" 
+            alt="Cutter Background" 
+            className="absolute inset-0 w-full h-full object-cover opacity-50"
+            referrerPolicy="no-referrer"
           />
+          {/* Semi-transparent Overlay */}
+          <div className="absolute inset-0 bg-viant-950/75" />
         </div>
       </div>
 

@@ -51,7 +51,7 @@ export const equipmentCategories: EquipmentCategory[] = [
     description: 'Автоматические линии упаковки',
     minProd: 'от 20 упаковок/мин',
     minPrice: 'По запросу',
-    image: '/images/packaging.webp',
+    image: '/images/upaknew.jpg',
     options: [
       { id: 'meat', label: 'Мясо', valid: true },
       { id: 'fish', label: 'Рыба', valid: true },
@@ -93,7 +93,7 @@ export const equipmentCategories: EquipmentCategory[] = [
     description: 'Формовка полуфабрикатов',
     minProd: 'от 1000 кг/час',
     minPrice: 'По запросу',
-    image: '/images/forming.webp',
+    image: '/images/formnew.png',
     options: [
       { id: '1000', label: '1000 кг/ч', valid: true },
       { id: '2000', label: '2000 кг/ч', valid: true },
@@ -107,7 +107,7 @@ export const equipmentCategories: EquipmentCategory[] = [
     description: 'Промышленные фритюрницы',
     minProd: 'от 500 кг/час',
     minPrice: 'По запросу',
-    image: '/images/fryer.jpg',
+    image: '/images/fritprom.jpg',
     options: [
       { id: '500', label: '500 кг/ч', valid: true },
       { id: '1000', label: '1000 кг/ч', valid: true },
@@ -121,7 +121,7 @@ export const equipmentCategories: EquipmentCategory[] = [
     description: 'Линии панировки и нанесения льезона',
     minProd: 'ширина от 400 мм',
     minPrice: 'По запросу',
-    image: '/images/breading.webp',
+    image: '/images/planirovshikinew.webp',
     options: [
       { id: '400', label: '400 мм', valid: true },
       { id: '600', label: '600 мм', valid: true },
