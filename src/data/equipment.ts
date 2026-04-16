@@ -21,7 +21,7 @@ export const equipmentCategories: EquipmentCategory[] = [
     description: 'Промышленные волчки для измельчения мяса',
     minProd: 'от 1300 кг/час',
     minPrice: 'По запросу',
-    image: '/images/grinders_main.png',
+    image: '/images/48121753.png.webp',
     options: [
       { id: '130', label: '130 мм (от 1300 кг/ч)', valid: true },
       { id: '160', label: '160 мм (от 3000 кг/ч)', valid: true },
