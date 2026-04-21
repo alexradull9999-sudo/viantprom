@@ -82,6 +82,12 @@ export function QuizModal({ isOpen, onClose, initialCategoryId }: QuizModalProps
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Yandex.Metrika Goal
+    if (typeof (window as any).ym !== 'undefined') {
+      (window as any).ym(108695275, 'reachGoal', 'send');
+    }
+
     console.log({ 
       category: selectedCategory?.name, 
       option: selectedOption?.label, 

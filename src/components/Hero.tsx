@@ -16,11 +16,11 @@ export function Hero({ onOpenQuiz }: HeroProps) {
           className="absolute inset-0 bg-viant-950 hidden lg:block"
           style={{ clipPath: 'polygon(65% 0, 100% 0, 100% 100%, 45% 100%)' }}
         >
-          {/* Background Image (Cutter) */}
+          {/* Background Image (Ulma FM 300) */}
           <img 
-            src="/images/cutter.png" 
-            alt="Cutter Background" 
-            className="absolute inset-0 w-full h-full object-cover opacity-50"
+            src="/images/upaknew.jpg" 
+            alt="Packaging System Background" 
+            className="absolute inset-0 w-full h-full object-cover opacity-50 scale-125 translate-x-12"
             referrerPolicy="no-referrer"
           />
           {/* Semi-transparent Overlay */}

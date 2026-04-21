@@ -19,6 +19,12 @@ export function CallbackModal({ isOpen, onClose }: CallbackModalProps) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Yandex.Metrika Goal
+    if (typeof (window as any).ym !== 'undefined') {
+      (window as any).ym(108695275, 'reachGoal', 'send');
+    }
+
     setIsSubmitted(true);
     setTimeout(() => {
       onClose();
