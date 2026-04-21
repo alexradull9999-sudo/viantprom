@@ -37,7 +37,7 @@ export function About() {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-3xl md:text-4xl font-bold text-viant-900 mb-6">
-              О компании <span className="text-brand-accent">Viantprom</span>
+              О компании <span className="text-brand-accent">Виантпром</span>
             </h2>
             <div className="space-y-6 text-lg text-viant-600 mb-10">
               <p>

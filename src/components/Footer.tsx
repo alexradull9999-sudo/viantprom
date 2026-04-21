@@ -11,7 +11,7 @@ export function Footer() {
               <div className="bg-white p-3 rounded-xl inline-flex">
                 <img 
                   src="/images/herologo.png" 
-                  alt="VIANTPROM Logo" 
+                  alt="ВИАНТПРОМ Logo" 
                   className="h-10 w-auto"
                 />
               </div>

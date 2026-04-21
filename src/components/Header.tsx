@@ -44,10 +44,10 @@ export function Header({ onOpenCallback }: HeaderProps) {
           <div className="flex items-center cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
             <img 
               src="/images/herologo.png" 
-              alt="VIANTPROM Logo" 
+              alt="ВИАНТПРОМ Logo" 
               className="h-8 w-auto"
             />
-            <span className="ml-2 text-xl font-bold text-viant-900 tracking-tight">Viantprom</span>
+            <span className="ml-2 text-xl font-bold text-viant-900 tracking-tight">Виантпром</span>
           </div>
 
           {/* Desktop Nav */}
