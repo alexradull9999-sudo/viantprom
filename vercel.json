@@ -1,7 +1,11 @@
 {
   "rewrites": [
     {
-      "source": "/((?!images|assets|.*\\..*).*)",
+      "source": "/api/:path*",
+      "destination": "/api/:path*"
+    },
+    {
+      "source": "/((?!api|images|assets|.*\\..*).*)",
       "destination": "/index.html"
     }
   ],

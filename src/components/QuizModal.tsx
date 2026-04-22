@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, CheckCircle2, AlertCircle, ArrowRight } from 'lucide-react';
 import { equipmentCategories, EquipmentCategory, EquipmentOption } from '../data/equipment';
+import { sendLead } from '../services/leadService';
 
 interface QuizModalProps {
   isOpen: boolean;
@@ -88,7 +89,8 @@ export function QuizModal({ isOpen, onClose, initialCategoryId }: QuizModalProps
       (window as any).ym(108714253, 'reachGoal', 'send');
     }
 
-    console.log({ 
+    // Send to Telegram via Backend
+    sendLead({ 
       category: selectedCategory?.name, 
       option: selectedOption?.label, 
       urgency,
@@ -100,7 +102,8 @@ export function QuizModal({ isOpen, onClose, initialCategoryId }: QuizModalProps
       productivity,
       coatingType,
       phone 
-    });
+    }).catch(err => console.error("Failed to notify Telegram:", err));
+
     setStep('success');
   };
 

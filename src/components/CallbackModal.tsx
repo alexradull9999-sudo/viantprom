@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from 'motion/react';
 import { X, ArrowRight, CheckCircle2 } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
+import { sendLead } from '../services/leadService';
 
 interface CallbackModalProps {
   isOpen: boolean;
@@ -9,10 +10,14 @@ interface CallbackModalProps {
 
 export function CallbackModal({ isOpen, onClose }: CallbackModalProps) {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [phone, setPhone] = useState('');
 
   useEffect(() => {
     if (!isOpen) {
-      const timer = setTimeout(() => setIsSubmitted(false), 300);
+      const timer = setTimeout(() => {
+        setIsSubmitted(false);
+        setPhone('');
+      }, 300);
       return () => clearTimeout(timer);
     }
   }, [isOpen]);
@@ -24,6 +29,12 @@ export function CallbackModal({ isOpen, onClose }: CallbackModalProps) {
     if (typeof (window as any).ym !== 'undefined') {
       (window as any).ym(108714253, 'reachGoal', 'send');
     }
+
+    // Send to Telegram
+    sendLead({ 
+      phone: phone,
+      category: 'Заказ обратного звонка (Модальное окно)'
+    }).catch(err => console.error("Failed to notify Telegram:", err));
 
     setIsSubmitted(true);
     setTimeout(() => {
@@ -87,6 +98,8 @@ export function CallbackModal({ isOpen, onClose }: CallbackModalProps) {
                         type="tel"
                         id="modal-phone"
                         required
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
                         className="w-full px-4 py-3 rounded-lg border border-viant-200 focus:ring-2 focus:ring-brand-accent focus:border-brand-accent outline-none transition-all"
                         placeholder="+7 958 581-24-12"
                       />

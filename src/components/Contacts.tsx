@@ -1,9 +1,12 @@
 import { motion } from 'motion/react';
 import { Phone, Mail, MapPin, ArrowRight, CheckCircle2 } from 'lucide-react';
 import React, { useState } from 'react';
+import { sendLead } from '../services/leadService';
 
 export function Contacts() {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -12,6 +15,13 @@ export function Contacts() {
     if (typeof (window as any).ym !== 'undefined') {
       (window as any).ym(108714253, 'reachGoal', 'send');
     }
+
+    // Send to Telegram
+    sendLead({ 
+      contactName: name,
+      phone: phone,
+      category: 'Форма обратной связи (Контактная информация)'
+    }).catch(err => console.error("Failed to notify Telegram:", err));
 
     setIsSubmitted(true);
     setTimeout(() => setIsSubmitted(false), 5000);
@@ -120,6 +130,8 @@ export function Contacts() {
                         type="text"
                         id="contact-name"
                         required
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
                         className="w-full px-4 py-3 rounded-lg border border-viant-200 focus:ring-2 focus:ring-brand-accent focus:border-brand-accent outline-none transition-all"
                         placeholder="Иван Иванов"
                       />
@@ -132,6 +144,8 @@ export function Contacts() {
                         type="tel"
                         id="contact-phone"
                         required
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
                         className="w-full px-4 py-3 rounded-lg border border-viant-200 focus:ring-2 focus:ring-brand-accent focus:border-brand-accent outline-none transition-all"
                         placeholder="+7 958 581-24-12"
                       />

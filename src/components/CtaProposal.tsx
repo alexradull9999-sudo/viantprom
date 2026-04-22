@@ -1,10 +1,12 @@
 import { motion } from 'motion/react';
 import { FileText, ArrowRight, CheckCircle2, MessageCircle, Send, MessageSquare } from 'lucide-react';
 import React, { useState } from 'react';
+import { sendLead } from '../services/leadService';
 
 export function CtaProposal() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [messenger, setMessenger] = useState('whatsapp');
+  const [phone, setPhone] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -13,6 +15,13 @@ export function CtaProposal() {
     if (typeof (window as any).ym !== 'undefined') {
       (window as any).ym(108714253, 'reachGoal', 'send');
     }
+
+    // Send to Telegram
+    sendLead({ 
+      phone: phone,
+      messenger: messenger,
+      category: 'Получение КП (Нижняя форма)'
+    }).catch(err => console.error("Failed to notify Telegram:", err));
 
     setIsSubmitted(true);
     setTimeout(() => setIsSubmitted(false), 5000);
@@ -113,6 +122,8 @@ export function CtaProposal() {
                       type="tel"
                       id="phone"
                       required
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
                       className="w-full px-4 py-3 rounded-lg border border-viant-200 focus:ring-2 focus:ring-brand-accent focus:border-brand-accent outline-none transition-all"
                       placeholder="+7 958 581-24-12"
                     />
