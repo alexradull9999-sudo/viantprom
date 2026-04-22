@@ -13,8 +13,9 @@ export default async function handler(
   const chatId = process.env.TELEGRAM_CHAT_ID;
 
   if (!botToken || !chatId) {
-    console.error("Missing TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID");
-    return res.status(500).json({ error: "Backend configuration error" });
+    const missing = !botToken ? 'TELEGRAM_BOT_TOKEN' : 'TELEGRAM_CHAT_ID';
+    console.error(`Missing environment variable: ${missing}`);
+    return res.status(500).json({ error: `Backend configuration error: Missing ${missing}. Please check your Secrets/Environment Variables.` });
   }
 
   try {
