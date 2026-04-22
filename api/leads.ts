@@ -19,9 +19,9 @@ export default async function handler(
 
   try {
     const message = `
-🚀 *Новая заявка ВИАНТПРОМ*
+<b>🚀 Новая заявка ВИАНТПРОМ</b>
 
-📌 *Данные:*
+<b>📌 Данные:</b>
 - Категория: ${leadData.category || 'Не указано'}
 - Характеристики: ${leadData.option || 'Не указано'}
 - Срочность: ${leadData.urgency || 'Не указано'}
@@ -33,7 +33,7 @@ export default async function handler(
 - Производительность: ${leadData.productivity || 'Не указано'}
 - Покрытие: ${leadData.coatingType || 'Не указано'}
 
-👤 *Контакты:*
+<b>👤 Контакты:</b>
 - Имя: ${leadData.name || leadData.contactName || 'Не указано'}
 - Телефон: ${leadData.phone || 'Не указано'}
     `;
@@ -44,14 +44,14 @@ export default async function handler(
       body: JSON.stringify({
         chat_id: chatId,
         text: message,
-        parse_mode: 'Markdown',
+        parse_mode: 'HTML',
       }),
     });
 
     if (!response.ok) {
       const errorData = await response.json();
       console.error("Telegram API Error:", errorData);
-      return res.status(502).json({ error: "Failed to send to Telegram" });
+      return res.status(502).json({ error: `Telegram Error: ${errorData.description || 'Unknown'}` });
     }
 
     return res.status(200).json({ success: true });

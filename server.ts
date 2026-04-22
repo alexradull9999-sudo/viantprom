@@ -27,9 +27,9 @@ async function startServer() {
 
     try {
       const message = `
-🚀 *Новая заявка ВИАНТПРОМ*
+<b>🚀 Новая заявка ВИАНТПРОМ</b>
 
-📌 *Данные:*
+<b>📌 Данные:</b>
 - Категория: ${leadData.category || 'Не указано'}
 - Характеристики: ${leadData.option || 'Не указано'}
 - Срочность: ${leadData.urgency || 'Не указано'}
@@ -41,7 +41,7 @@ async function startServer() {
 - Производительность: ${leadData.productivity || 'Не указано'}
 - Покрытие: ${leadData.coatingType || 'Не указано'}
 
-👤 *Контакты:*
+<b>👤 Контакты:</b>
 - Имя: ${leadData.name || leadData.contactName || 'Не указано'}
 - Телефон: ${leadData.phone || 'Не указано'}
       `;
@@ -52,16 +52,17 @@ async function startServer() {
         body: JSON.stringify({
           chat_id: chatId,
           text: message,
-          parse_mode: 'Markdown',
+          parse_mode: 'HTML',
         }),
       });
 
       if (!response.ok) {
         const errorData = await response.json();
         console.error("Telegram API Error:", errorData);
-        return res.status(502).json({ error: "Failed to send to Telegram" });
+        return res.status(502).json({ error: `Telegram Error: ${errorData.description || 'Unknown'}` });
       }
 
+      console.log("Successfully sent lead to Telegram");
       res.status(200).json({ success: true });
     } catch (error) {
       console.error("Error processing lead:", error);
