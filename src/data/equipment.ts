@@ -51,7 +51,7 @@ export const equipmentCategories: EquipmentCategory[] = [
     description: 'Автоматические линии упаковки',
     minProd: 'от 20 упаковок/мин',
     minPrice: 'По запросу',
-    image: '/images/upaknew.jpg',
+    image: '/images/ypakovochnoenew.png',
     options: [
       { id: 'meat', label: 'Мясо', valid: true },
       { id: 'fish', label: 'Рыба', valid: true },

@@ -18,7 +18,7 @@ export function Hero({ onOpenQuiz }: HeroProps) {
         >
           {/* Background Image (Ulma FM 300) */}
           <img 
-            src="/images/upaknew.jpg" 
+            src="/images/ypakovochnoenew.png" 
             alt="Packaging System Background" 
             className="absolute inset-0 w-full h-full object-cover opacity-50 scale-125 translate-x-12"
             referrerPolicy="no-referrer"
