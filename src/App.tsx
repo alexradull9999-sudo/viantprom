@@ -38,7 +38,7 @@ export default function App() {
       <ServiceSupport onOpenCallback={() => setIsCallbackModalOpen(true)} />
       <Trust />
       <Contacts />
-      <Footer />
+      <Footer onOpenQuiz={handleOpenQuiz} />
       <QuizModal 
         isOpen={isQuizOpen} 
         onClose={() => setIsQuizOpen(false)} 

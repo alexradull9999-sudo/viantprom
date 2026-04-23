@@ -89,7 +89,7 @@ export const equipmentCategories: EquipmentCategory[] = [
   },
   {
     id: 'forming',
-    name: 'Формовочные машины',
+    name: 'Шприцы вакуумные',
     description: 'Формовка полуфабрикатов',
     minProd: 'от 1000 кг/час',
     minPrice: 'По запросу',
@@ -145,7 +145,7 @@ export const equipmentCategories: EquipmentCategory[] = [
   },
   {
     id: 'fillers',
-    name: 'Шприцы вакуумные',
+    name: 'Инъекторы',
     description: 'Вакуумное наполнение колбасных изделий',
     minProd: 'от 3000 кг/час',
     minPrice: 'По запросу',

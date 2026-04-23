@@ -94,7 +94,7 @@ export function Contacts() {
                     <div>
                       <p className="text-sm text-viant-400 mb-1">Офис</p>
                       <p className="text-lg font-semibold">
-                        г. Москва, ул. Промышленная, д. 1
+                        Московская область, Люберецкий район, д.Машково, Машковский проезд, 10А
                       </p>
                     </div>
                   </div>

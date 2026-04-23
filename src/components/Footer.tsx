@@ -1,6 +1,10 @@
 import { Factory, Mail, Phone, MapPin } from 'lucide-react';
 
-export function Footer() {
+interface FooterProps {
+  onOpenQuiz: (categoryId: string | null) => void;
+}
+
+export function Footer({ onOpenQuiz }: FooterProps) {
   return (
     <footer className="bg-viant-950 text-viant-300 py-16 border-t border-viant-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -42,11 +46,46 @@ export function Footer() {
           <div>
             <h3 className="text-sm font-semibold text-white tracking-wider uppercase mb-6">Оборудование</h3>
             <ul className="space-y-3">
-              <li><a href="#catalog" className="text-viant-400 hover:text-white transition-colors">Волчки и куттеры</a></li>
-              <li><a href="#catalog" className="text-viant-400 hover:text-white transition-colors">Упаковочные линии</a></li>
-              <li><a href="#catalog" className="text-viant-400 hover:text-white transition-colors">Формовочные машины</a></li>
-              <li><a href="#catalog" className="text-viant-400 hover:text-white transition-colors">Фритюрное оборудование</a></li>
-              <li><a href="#catalog" className="text-viant-400 hover:text-white transition-colors">Инъекторы</a></li>
+              <li>
+                <button 
+                  onClick={() => onOpenQuiz('grinders')}
+                  className="text-viant-400 hover:text-white transition-colors cursor-pointer text-left"
+                >
+                  Волчки и куттеры
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => onOpenQuiz('packaging')}
+                  className="text-viant-400 hover:text-white transition-colors cursor-pointer text-left"
+                >
+                  Упаковочные линии
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => onOpenQuiz('forming')}
+                  className="text-viant-400 hover:text-white transition-colors cursor-pointer text-left"
+                >
+                  Шприцы вакуумные
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => onOpenQuiz('frying')}
+                  className="text-viant-400 hover:text-white transition-colors cursor-pointer text-left"
+                >
+                  Фритюрное оборудование
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => onOpenQuiz('fillers')}
+                  className="text-viant-400 hover:text-white transition-colors cursor-pointer text-left"
+                >
+                  Инъекторы
+                </button>
+              </li>
             </ul>
           </div>
           
