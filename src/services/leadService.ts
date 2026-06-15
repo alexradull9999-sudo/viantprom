@@ -16,20 +16,24 @@ export interface LeadData {
 
 export async function sendLead(data: LeadData) {
   try {
-    const response = await fetch('/api/leads', {
+    const webhookUrl = 'https://hook.eu1.make.com/onyhfuai5sqn8iv6zcwpgju8u3ljwq4i';
+    const response = await fetch(webhookUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify({
+        ...data,
+        source: 'ВИАНТПРОМ Заявка'
+      }),
     });
 
     if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.error || 'Failed to send lead');
+      throw new Error(`Failed to send lead: ${response.statusText}`);
     }
 
-    return await response.json();
+    // Make webhook generally returns a text like 'Accepted', so we can return text or a simple success object.
+    return { success: true };
   } catch (error) {
     console.error('Lead service error:', error);
     throw error;
